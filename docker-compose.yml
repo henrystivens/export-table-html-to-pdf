@@ -1,0 +1,18 @@
+version: "3"
+services:
+    webapp:
+      container_name: export-table-mpdf
+      build:
+        context: .
+        dockerfile: Dockerfile
+      ports:
+        - "8186:80"
+      volumes:
+        - .:/var/www
+      external_links:
+        - mysql-dev:mysql
+      networks:
+        - network-dev
+networks:
+  network-dev:
+    external: true
