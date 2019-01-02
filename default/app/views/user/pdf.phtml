@@ -1,0 +1,22 @@
+<?php if (count($data) > 0) { ?>
+<table class="report">
+        <thead>
+            <tr>            
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Correo</th>                
+            </tr>
+        </thead>
+        <tbody> 
+            <?php foreach ($data as $item) { ?> 
+                <tr>
+                    <td><?= $item->name ?></td>
+                    <td><?= $item->age ?></td>
+                    <td><?= $item->email ?></td>                                        
+                </tr> 
+            <?php } ?>        
+        </tbody>
+    </table>
+<?php } else { ?>
+    <h2>No hay ningún registro</h2>
+<?php } ?>
