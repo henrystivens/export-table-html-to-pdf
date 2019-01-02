@@ -16,7 +16,7 @@ $databases['development'] = [
   |host: ip o nombre del host de la base de datos
   |---------------------------------------------------------
   */
-  'host'      => 'localhost',
+  'host'      => 'mysql-dev',
   /*
   |---------------------------------------------------------
   |username: usuario con permisos en la base de datos
@@ -28,13 +28,13 @@ $databases['development'] = [
   |password: clave del usuario de la base de datos
   |---------------------------------------------------------
   */
-  'password' => '',
+  'password' => 'root',
   /*
   |---------------------------------------------------------
   |test: nombre de la base de datos
   |---------------------------------------------------------
   */
-  'name' => 'test',
+  'name' => 'paginate-php',
   /*
   |---------------------------------------------------------
   |type: tipo de motor de base de datos (mysql|pgsql|sqlite)
