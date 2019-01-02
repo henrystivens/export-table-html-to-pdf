@@ -1,0 +1,19 @@
+body {    
+    line-height: 1.6;
+    font-weight: 400;
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #222; 
+}
+
+.report {
+    border-collapse: collapse;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.report th,
+.report td {
+    padding: 5px;
+    text-align: left;
+    border: 1px solid #E1E1E1; 
+}
