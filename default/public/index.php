@@ -5,15 +5,10 @@
  * LICENSE
  *
  * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://wiki.kumbiaphp.com/Licencia
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@kumbiaphp.com so we can send you a copy immediately.
+ * with this package in the file LICENSE.
  *
- * @copyright  Copyright (c) 2005 - 2018 Kumbia Team (http://www.kumbiaphp.com)
- * @license    http://wiki.kumbiaphp.com/Licencia     New BSD License
+ * @copyright  Copyright (c) 2005 - 2019 KumbiaPHP Team (http://www.kumbiaphp.com)
+ * @license    https://github.com/KumbiaPHP/KumbiaPHP/blob/master/LICENSE   New BSD License
  */
 
 /**
@@ -69,7 +64,7 @@ define('APP_PATH', dirname(__DIR__).'/app/');
  * - Ruta al directorio que contiene el núcleo de Kumbia (por defecto la ruta al directorio core)
  * - En producción, es recomendable ponerla manual usando const
  */
-define('CORE_PATH', dirname(dirname(APP_PATH)).'/core/');
+define('CORE_PATH', dirname(APP_PATH, 2).'/core/');
 //const CORE_PATH = '/path/to/core/';
 
 /*
@@ -85,7 +80,7 @@ define('CORE_PATH', dirname(dirname(APP_PATH)).'/core/');
 define('PUBLIC_PATH', substr($_SERVER['SCRIPT_NAME'], 0, -9)); // - index.php string[9]
 
 /**
- * En producción descomentar las 3 lineas de arriba y usar const
+ * En producción descomentar la línea de arriba y usar const
  * '/'          en el root del dominio, recomendado
  * '/carpeta/'  en una carpeta o varias
  * 'https://www.midominio.com/'  usando dominio.
