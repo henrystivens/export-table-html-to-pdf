@@ -1,21 +1,16 @@
 <?php
 /**
- * KumbiaPHP web & app Framework.
+ * KumbiaPHP web & app Framework
  *
  * LICENSE
  *
  * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://wiki.kumbiaphp.com/Licencia
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@kumbiaphp.com so we can send you a copy immediately.
+ * with this package in the file LICENSE.
  *
  * @category   Kumbia
  *
- * @copyright  Copyright (c) 2005 - 2018 Kumbia Team (http://www.kumbiaphp.com)
- * @license    http://wiki.kumbiaphp.com/Licencia     New BSD License
+ * @copyright  Copyright (c) 2005 - 2019 KumbiaPHP Team (http://www.kumbiaphp.com)
+ * @license    https://github.com/KumbiaPHP/KumbiaPHP/blob/master/LICENSE   New BSD License
  */
 require_once __DIR__.'/controller.php';
 
@@ -99,8 +94,8 @@ class KumbiaRest extends Controller
     protected function rewriteActionName()
     {
         /**
-         * reescribimos la acción a ejecutar, ahora será el mètodo de
-         * la peticion: get(:id), getAll , put, post, delete, etc.
+         * reescribimos la acción a ejecutar, ahora será el método de
+         * la petición: get(:id), getAll , put, post, delete, etc.
          */
         $action = $this->action_name;
         $method = strtolower(Router::get('method'));
@@ -136,7 +131,7 @@ class KumbiaRest extends Controller
     }
 
     /**
-     * Retorna los parametros de la petición el función del formato de entrada
+     * Retorna los parámetros de la petición el función del formato de entrada
      * de los mismos. Hace uso de los parser definidos en la clase.
      */
     protected function param()
@@ -182,7 +177,7 @@ class KumbiaRest extends Controller
         /* Elimina espacios, convierte a minusculas, y separa */
         $accept = explode(',', strtolower(str_replace(' ', '', Input::server('HTTP_ACCEPT'))));
         foreach ($accept as $a) {
-            $q = 1; /* Por defecto la proridad es uno, el siguiente verifica si es otra */
+            $q = 1; /* Por defecto la prioridad es 1, el siguiente verifica si es otra */
             if (strpos($a, ';q=')) {
                 /* parte el "mime/type;q=X" en dos: "mime/type" y "X" */
                 list($a, $q) = explode(';q=', $a);
@@ -205,12 +200,7 @@ class KumbiaRest extends Controller
      */
     protected static function parseJSON($input)
     {
-        if (function_exists('json_decode')) {
-            $result = json_decode($input, true);
-            if ($result) {
-                return $result;
-            }
-        }
+        return json_decode($input, true);
     }
 
     /**
@@ -261,11 +251,11 @@ class KumbiaRest extends Controller
     }
 
     /**
-     * Realiza la conversion de formato de Formulario a array.
+     * Realiza la conversión de formato de Formulario a array.
      *
      * @param string $input
      *
-     * @return arrat
+     * @return array
      */
     protected static function parseForm($input)
     {
@@ -281,13 +271,12 @@ class KumbiaRest extends Controller
      */
     protected static function getInputFormat()
     {
-        $str = '';
         if (isset($_SERVER['CONTENT_TYPE'])) {
-            $s = explode(';', $_SERVER['CONTENT_TYPE']);
-            $str = trim($s[0]);
+            $str = explode(';', $_SERVER['CONTENT_TYPE']);
+            return trim($str[0]);
         }
 
-        return $str;
+        return '';
     }
 
     /**
@@ -317,19 +306,6 @@ class KumbiaRest extends Controller
      */
     protected static function getHeaders()
     {
-        /*Esta función solo existe en apache*/
-        if (function_exists('getallheaders')) {
-            return getallheaders();
-        }
-
-        $headers = array();
-
-        foreach ($_SERVER as $name => $value) {
-            if (substr($name, 0, 5) == 'HTTP_') {
-                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
-            }
-        }
-
-        return $headers;
+        return getallheaders();
     }
 }
