@@ -3,7 +3,10 @@
 require_once APP_PATH . '../../vendor/autoload.php';
 
 use Mpdf\Mpdf;
+use Mpdf\HTMLParserMode;
+use Mpdf\Output\Destination;
 
+//Activa el almacenamiento en búfer de la salida
 ob_start();
 
 ?>
@@ -42,15 +45,16 @@ ob_clean();
 
 // Crea una instancia de la clase y le pasa el directorio temporal
 $mpdf = new Mpdf(['tempDir' => APP_PATH . '/temp']);
+
 // Carga el CSS externo
 $stylesheet = file_get_contents(APP_PATH . '../public/css/pdf.min.css');
-$mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
+$mpdf->WriteHTML($stylesheet, HTMLParserMode::HEADER_CSS);
 // Escribe el contenido HTML (Template + View):
 $mpdf->WriteHTML($html);
 
 // Obliga la descarga del PDF y se personaliza el nombre
 if (isset($fileName)) {
-    $mpdf->Output("$fileName.pdf", \Mpdf\Output\Destination::DOWNLOAD);
+    $mpdf->Output("$fileName.pdf", Destination::DOWNLOAD);
 } else {
-    $mpdf->Output("report.pdf", \Mpdf\Output\Destination::DOWNLOAD);
+    $mpdf->Output("report.pdf", Destination::DOWNLOAD);
 }
