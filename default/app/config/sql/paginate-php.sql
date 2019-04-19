@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.5.55, for debian-linux-gnu (x86_64)
 --
--- Host: mysql-dev    Database: file_and_data_upload
+-- Host: mysql-dev    Database: paginate-php
 -- ------------------------------------------------------
 -- Server version	5.7.16
 
