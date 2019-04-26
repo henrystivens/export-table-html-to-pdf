@@ -22,22 +22,22 @@ ob_start();
 
     </head>
     <body>
-    <htmlpageheader name="myHeader1">
-        <div style="text-align: center; font-weight: bold"><?= isset($title) ? $title : 'Report' ?></div>
-    </htmlpageheader>
+        <htmlpageheader name="myHeader1">
+            <div style="text-align: center; font-weight: bold"><?= isset($title) ? $title : 'Report' ?></div>
+        </htmlpageheader>
 
-    <?php View::content(); ?>
+        <?php View::content(); ?>
 
-    <htmlpagefooter name="myFooter1">		
-        <table width="100%" style="border-top: 1px dotted grey; vertical-align: bottom; font-family: serif; font-size: 8pt;  color: #000000; font-style: italic;">
-            <tr>
-                <td width="33%"><span style="font-style: italic;">{DATE d/m/Y}</span></td>
-                <td width="33%" align="center" style="font-weight: bold; font-style: italic;"></td>
-                <td width="33%" style="text-align: right; ">{PAGENO}/{nbpg}</td>
-            </tr>
-        </table>
-    </htmlpagefooter>
-</body>
+        <htmlpagefooter name="myFooter1">
+            <table width="100%" style="border-top: 1px dotted grey; vertical-align: bottom; font-family: serif; font-size: 8pt;  color: #000000; font-style: italic;">
+                <tr>
+                    <td width="33%"><span style="font-style: italic;">{DATE d/m/Y}</span></td>
+                    <td width="33%" align="center" style="font-weight: bold; font-style: italic;"></td>
+                    <td width="33%" style="text-align: right; ">{PAGENO}/{nbpg}</td>
+                </tr>
+            </table>
+        </htmlpagefooter>
+    </body>
 </html>
 <?php
 $html = ob_get_clean();
@@ -47,14 +47,14 @@ ob_clean();
 $mpdf = new Mpdf(['tempDir' => APP_PATH . '/temp']);
 
 // Carga el CSS externo
-$stylesheet = file_get_contents(APP_PATH . '../public/css/pdf.min.css');
+$stylesheet = file_get_contents('./css/pdf.min.css');
 $mpdf->WriteHTML($stylesheet, HTMLParserMode::HEADER_CSS);
 // Escribe el contenido HTML (Template + View):
 $mpdf->WriteHTML($html);
 
-// Obliga la descarga del PDF y se personaliza el nombre
-if (isset($fileName)) {
-    $mpdf->Output("$fileName.pdf", Destination::DOWNLOAD);
-} else {
-    $mpdf->Output("report.pdf", Destination::DOWNLOAD);
+// Título por defecto
+if (! isset($fileName)) {
+    $fileName = 'Report';
 }
+// Obliga la descarga del PDF
+$mpdf->Output("$fileName.pdf", Destination::DOWNLOAD);
