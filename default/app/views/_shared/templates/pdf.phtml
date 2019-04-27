@@ -12,28 +12,20 @@ ob_start();
 ?>
 <html>
     <head>
-        <style type="text/css">
-            @page {
-                background-color:#ffffff;
-                header: html_myHeader1;
-                footer: html_myFooter1;
-            }
-        </style> 	
-
+        <title></title><?= isset($title) ? $title : 'Report'; ?></title>
     </head>
     <body>
         <htmlpageheader name="myHeader1">
-            <div style="text-align: center; font-weight: bold"><?= isset($title) ? $title : 'Report' ?></div>
+            <div class="title-header"><?= isset($title) ? $title : 'Report' ?></div>
         </htmlpageheader>
 
         <?php View::content(); ?>
 
         <htmlpagefooter name="myFooter1">
-            <table width="100%" style="border-top: 1px dotted grey; vertical-align: bottom; font-family: serif; font-size: 8pt;  color: #000000; font-style: italic;">
+            <table width="100%" class="table_footer">
                 <tr>
-                    <td width="33%"><span style="font-style: italic;">{DATE d/m/Y}</span></td>
-                    <td width="33%" align="center" style="font-weight: bold; font-style: italic;"></td>
-                    <td width="33%" style="text-align: right; ">{PAGENO}/{nbpg}</td>
+                    <td width="50%">{DATE d/m/Y}</td>
+                    <td width="50%" style="text-align: right; ">{PAGENO}/{nbpg}</td>
                 </tr>
             </table>
         </htmlpagefooter>
@@ -44,11 +36,13 @@ $html = ob_get_clean();
 ob_clean();
 
 // Crea una instancia de la clase y le pasa el directorio temporal
-$mpdf = new Mpdf(['tempDir' => APP_PATH . '/temp']);
+$mpdf = new Mpdf(['tempDir' => APP_PATH . 'temp/mpdf', 'margin-top' => 30]);
 
 // Carga el CSS externo
-$stylesheet = file_get_contents('./css/pdf.min.css');
+$stylesheet = file_get_contents('css/pdf.min.css');
 $mpdf->WriteHTML($stylesheet, HTMLParserMode::HEADER_CSS);
+
+$mpdf->margin_header =
 // Escribe el contenido HTML (Template + View):
 $mpdf->WriteHTML($html);
 
